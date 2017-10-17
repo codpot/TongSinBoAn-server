@@ -13,4 +13,15 @@ router.post('/', function (req, res) {
   }
 });
 
+// 정책 수정
+router.put('/:policy_idx', function (req, res) {
+  if (req.session.member_idx && req.session.level == 3) {
+    policy.update(req.params.policy_idx, req.body.name, req.body.comment, req.body.mdm, function (result, msg) {
+      res.json({'result': result, 'msg': msg});
+    });
+  } else {
+    res.json({'result': false, 'msg': 'login_required'});
+  }
+});
+
 module.exports = router;
