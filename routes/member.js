@@ -22,4 +22,14 @@ router.post('/login', function (req, res) {
   });
 });
 
+// 로그아웃
+router.get('/logout', function (req, res) {
+  if (req.session.member_idx) {
+    req.session = null;
+    res.json({'result': true});
+  } else {
+    res.json({'result': false, 'msg': 'not_logined'});
+  }
+});
+
 module.exports = router;
