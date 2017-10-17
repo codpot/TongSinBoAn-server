@@ -1,5 +1,7 @@
 var express = require('express');
 var shajs = require('sha.js');
+var md5 = require('md5');
+var moment = require('moment');
 var member = require('../db/member');
 var router = express.Router();
 
@@ -20,6 +22,23 @@ router.post('/login', function (req, res) {
       res.json({'result': false, 'msg': 'login_failed'});
     }
   });
+});
+
+// 출입증 발급
+router.get('/passport', function (req, res) {
+  if (req.session.member_idx) {
+    var token = md5(req.session.member_idx + Date.now());
+    var expire = moment().add(60, 'seconds').format('YYYY-MM-DD HH:mm:ss');
+    member.make_passport(req.session.member_idx, token, expire, function (result) {
+      if (result) {
+        res.json({'result': true, 'token': token, 'expire': expire});
+      } else {
+        res.json({'result': false, 'msg': 'passport_generate_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'login_required'});
+  }
 });
 
 // 로그아웃
