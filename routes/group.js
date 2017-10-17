@@ -16,7 +16,7 @@ var group_create = function (res, name, member_idx) {
 
 // [함수] 그룹 가입
 var group_join = function (res, member_idx, group_idx, level, ok) {
-  group.assign(member_idx, group_idx, level, ok, function (i_result) {
+  member.group_assign(member_idx, group_idx, level, ok, function (i_result) {
     if (i_result) {
       res.json({'result': true, 'msg': 'success'});
     } else {
@@ -28,7 +28,7 @@ var group_join = function (res, member_idx, group_idx, level, ok) {
 // 그룹 생성
 router.post('/', function (req, res) {
   if (req.session.member_idx) {
-    member.read(req.session.member_idx, function (result, data) {
+    member.read_idx(req.session.member_idx, function (result, data) {
       if (data[0]['level'] === 0) {
         group_create(res, req.body.name, req.session.member_idx);
       } else {
@@ -43,7 +43,7 @@ router.post('/', function (req, res) {
 // 그룹 가입
 router.post('/join', function (req, res) {
   if (req.session.member_idx) {
-    member.read(req.session.member_idx, function (result, data) {
+    member.read_idx(req.session.member_idx, function (result, data) {
       if (data[0]['level'] === 0) {
         group_join(res, req.session.member_idx, req.body.group, 1, 0);
       } else {

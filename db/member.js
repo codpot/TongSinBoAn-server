@@ -1,25 +1,19 @@
 var db = require('./index');
 
-// 회원가입
+// 회원 생성
 exports.create = function (userid, passwd, name, callback) {
-  userid_exists(userid, function (result) {
-    if (!result) {
-      db.query("INSERT INTO `member` (`userid`, `passwd`, `name`) VALUES (?, ?, ?);", [userid, passwd, name], function (error, results, fields) {
-        if (!error) {
-          callback(true, 'success');
-        } else {
-          callback(false, 'member_create_failed');
-        }
-      });
+  db.query("INSERT INTO `member` (userid, passwd, name) VALUES (?, ?, ?);", [userid, passwd, name], function (error, results) {
+    if (!error) {
+      callback(results.insertId);
     } else {
-      callback(false, 'userid_already_exists');
+      callback(false);
     }
   });
 };
 
-// 목록
-exports.list = function (group_idx, callback) {
-  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.token_valid, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.group_idx=?;", [group_idx], function (error, results, fields) {
+// 회원 조회
+exports.read = function (group_idx, callback) {
+  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.token_valid, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.group_idx=?;", [group_idx], function (error, results) {
     if (!error) {
       callback(true, results);
     } else {
@@ -28,9 +22,9 @@ exports.list = function (group_idx, callback) {
   });
 };
 
-// 로그인
-exports.login = function (userid, passwd, callback) {
-  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.token_valid, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.userid = ? AND m.passwd = ?;", [userid, passwd], function (error, results, fields) {
+// 회원 조회 (인덱스)
+exports.read_idx = function (member_idx, callback) {
+  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.token_valid, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.idx=?;", [member_idx], function (error, results) {
     if (!error && results.length === 1) {
       callback(true, results);
     } else {
@@ -39,9 +33,9 @@ exports.login = function (userid, passwd, callback) {
   });
 };
 
-// 조회
-exports.read = function (idx, callback) {
-  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.token_valid, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.idx=?;", [idx], function (error, results, fields) {
+// 회원 조회 (아이디)
+exports.read_userid = function (userid, callback) {
+  db.query("SELECT idx FROM `member` WHERE userid = ?;", [userid], function (error, results) {
     if (!error && results.length === 1) {
       callback(true, results);
     } else {
@@ -50,22 +44,22 @@ exports.read = function (idx, callback) {
   });
 };
 
-// 출입증 발급
-exports.make_passport = function (idx, token, expire, callback) {
-  db.query("UPDATE `member` SET `token`=?, `token_valid`=? WHERE  `idx`=?;", [token, expire, idx], function (error, results, fields) {
+// 회원 조회 (로그인)
+exports.read_login = function (userid, passwd, callback) {
+  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.token_valid, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.userid = ? AND m.passwd = ?;", [userid, passwd], function (error, results) {
+    if (!error && results.length === 1) {
+      callback(true, results);
+    } else {
+      callback(false);
+    }
+  });
+};
+
+// 회원 수정
+exports.update = function (member_idx, value, callback) {
+  db.query("UPDATE `member` SET ? WHERE idx=?;", [value, member_idx], function (error, results) {
     if (!error) {
       callback(Boolean(results.affectedRows));
-    } else {
-      callback(false);
-    }
-  });
-};
-
-// 아이디 중복확인
-var userid_exists = function (userid, callback) {
-  db.query("SELECT `idx` FROM `member` WHERE `userid` = ?;", [userid], function (error, results, fields) {
-    if (!error && results.length === 1) {
-      callback(true);
     } else {
       callback(false);
     }
