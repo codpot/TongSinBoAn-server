@@ -19,7 +19,18 @@ exports.create = function (userid, passwd, name, callback) {
 
 // 로그인
 exports.login = function (userid, passwd, callback) {
-  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.userid = ? AND m.passwd = ?;", [userid, passwd], function (error, results, fields) {
+  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.userid = ? AND m.passwd = ?;", [userid, passwd], function (error, results, fields) {
+    if (!error && results.length === 1) {
+      callback(true, results);
+    } else {
+      callback(false);
+    }
+  });
+};
+
+// 조회
+exports.read = function (idx, callback) {
+  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.idx=?;", [idx], function (error, results, fields) {
     if (!error && results.length === 1) {
       callback(true, results);
     } else {
