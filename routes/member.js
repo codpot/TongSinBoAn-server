@@ -28,7 +28,7 @@ router.get('/logout', function (req, res) {
     req.session = null;
     res.json({'result': true});
   } else {
-    res.json({'result': false, 'msg': 'not_logined'});
+    res.json({'result': false, 'msg': 'login_required'});
   }
 });
 
