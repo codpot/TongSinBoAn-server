@@ -6,6 +6,7 @@ var cookieSession = require('cookie-session');
 var group = require('./routes/group');
 var log = require('./routes/log');
 var member = require('./routes/member');
+var policy = require('./routes/policy');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use(function (req, res, next) {
 app.use('/group', group);
 app.use('/log', log);
 app.use('/member', member);
+app.use('/policy', policy);
 
 app.use(function (req, res, next) {
   res.status(404).json({'result': false, 'msg': 'api_not_found'});
