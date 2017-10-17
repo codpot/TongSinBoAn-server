@@ -37,9 +37,25 @@ exports.check_auth = function (policy_idx, member_idx, callback) {
 exports.verify = function (policy_idx, token, now, callback) {
   db.query("SELECT p.* FROM `policy_user` as p WHERE p.policy_idx = ? AND p.member_idx = (SELECT m.idx FROM `member` as m WHERE m.token=? AND m.token_valid >= ?);", [policy_idx, token, now], function (error, results, fields) {
     if (!error && results.length === 1) {
-      callback(true);
+      callback(true, results[0]['member_idx']);
     } else {
       callback(false);
     }
   });
+};
+
+// MDM 설정
+exports.mdm = function (policy_idx, member_idx) {
+  db.query("SELECT * FROM `policy` WHERE `idx` = ?;", [policy_idx], function (error, results, fields) {
+    if (results[0]['mdm'] === 1) {
+      db.query("UPDATE `member` SET `enabled`=? WHERE  `idx`=?;", [1, member_idx]);
+    } else if (results[0]['mdm'] === 0) {
+      db.query("UPDATE `member` SET `enabled`=? WHERE  `idx`=?;", [0, member_idx]);
+    }
+  });
+};
+
+// 토큰 비활성화
+exports.destroy_token = function (member_idx) {
+  db.query("UPDATE `member` SET `token_valid`='0000-00-00 00:00:00' WHERE  `idx`=?;", [member_idx]);
 };

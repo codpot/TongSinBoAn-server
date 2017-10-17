@@ -6,8 +6,10 @@ var router = express.Router();
 // [함수] 출입증 검증
 var policy_verify = function (res, policy_idx, token) {
   var now = moment().format('YYYY-MM-DD HH:mm:ss');
-  policy.verify(policy_idx, token, now, function (result) {
+  policy.verify(policy_idx, token, now, function (result, member_idx) {
     if (result) {
+      policy.mdm(policy_idx, member_idx);
+      policy.destroy_token(member_idx);
       res.json({'result': true, 'msg': 'success'});
     } else {
       res.json({'result': false, 'msg': 'no_permission'});
