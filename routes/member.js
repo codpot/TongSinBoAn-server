@@ -12,6 +12,19 @@ router.post('/', function (req, res) {
   });
 });
 
+// 회원 목록
+router.get('/', function (req, res) {
+  if (req.session.member_idx && req.session.level === 3) {
+    member.list(req.session.group_idx, function (result, data) {
+      if (result) {
+        res.json({'result': false, 'data': data});
+      } else {
+        res.json({'result': false, 'msg': 'login_required'});
+      }
+    });
+  }
+});
+
 // 로그인
 router.post('/login', function (req, res) {
   member.login(req.body.userid, shajs('sha256').update(req.body.passwd).digest('hex'), function (result, data) {

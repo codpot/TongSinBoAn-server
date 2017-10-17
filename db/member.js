@@ -17,6 +17,17 @@ exports.create = function (userid, passwd, name, callback) {
   });
 };
 
+// 목록
+exports.list = function (group_idx, callback) {
+  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.token_valid, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.group_idx=?;", [group_idx], function (error, results, fields) {
+    if (!error) {
+      callback(true, results);
+    } else {
+      callback(false);
+    }
+  });
+};
+
 // 로그인
 exports.login = function (userid, passwd, callback) {
   db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.group_ok, m.level, m.token, m.token_valid, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.userid = ? AND m.passwd = ?;", [userid, passwd], function (error, results, fields) {
