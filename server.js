@@ -1,6 +1,7 @@
 require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
+var cookieSession = require('cookie-session');
 
 var group = require('./routes/group');
 var log = require('./routes/log');
@@ -10,6 +11,11 @@ var app = express();
 
 app.disable('x-powered-by');
 app.use(bodyParser.json());
+app.use(cookieSession({
+  name: 'session',
+  secret: process.env.SESSION_SECRET,
+  maxAge: 30 * 24 * 60 * 60 * 1000
+}));
 
 app.use(function (req, res, next) {
   res.contentType('application/json');
