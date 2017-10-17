@@ -11,11 +11,17 @@ var app = express();
 
 app.disable('x-powered-by');
 app.use(bodyParser.json());
+
 app.use(cookieSession({
   name: 'session',
   secret: process.env.SESSION_SECRET,
   maxAge: 30 * 24 * 60 * 60 * 1000
 }));
+
+app.use(function (req, res, next) {
+  req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
+  next();
+});
 
 app.use(function (req, res, next) {
   res.contentType('application/json');
