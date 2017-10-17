@@ -17,6 +17,46 @@ var policy_verify = function (res, policy_idx, token) {
   });
 };
 
+// 정책 목록
+router.get('/', function (req, res) {
+  if (req.session.member_idx) {
+    policy.read(req.session.member_idx, function (result, data) {
+      if (result) {
+        res.json({'result': true, 'data': data});
+      } else {
+        res.json({'result': false, 'msg': data});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'login_required'});
+  }
+});
+
+// 정책 목록 (관리자)
+router.get('/admin', function (req, res) {
+  if (req.session.member_idx && req.session.level >= 2) {
+    if (req.session.level === 3) {
+      policy.read_master(req.session.group_idx, function (result, data) {
+        if (result) {
+          res.json({'result': true, 'data': data});
+        } else {
+          res.json({'result': false, 'msg': data});
+        }
+      });
+    } else {
+      policy.read_admin(req.session.member_idx, function (result, data) {
+        if (result) {
+          res.json({'result': true, 'data': data});
+        } else {
+          res.json({'result': false, 'msg': data});
+        }
+      });
+    }
+  } else {
+    res.json({'result': false, 'msg': 'login_required'});
+  }
+});
+
 // 정책 생성
 router.post('/', function (req, res) {
   if (req.session.member_idx && req.session.level === 3) {

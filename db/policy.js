@@ -11,6 +11,39 @@ exports.create = function (group_idx, name, comment, mdm, callback) {
   });
 };
 
+// 정책 목록
+exports.read = function (member_idx, callback) {
+  db.query("SELECT p.* FROM `policy` AS p WHERE p.idx IN (SELECT u.policy_idx AS idx FROM policy_user AS u WHERE u.member_idx = ?);", [member_idx], function (error, results, fields) {
+    if (!error) {
+      callback(true, results);
+    } else {
+      callback(false, 'policy_read_failed');
+    }
+  });
+};
+
+// 정책 목록 (마스터)
+exports.read_master = function (group_idx, callback) {
+  db.query("SELECT * FROM `policy` WHERE group_idx = ?;", [group_idx], function (error, results, fields) {
+    if (!error) {
+      callback(true, results);
+    } else {
+      callback(false, 'policy_read_failed');
+    }
+  });
+};
+
+// 정책 목록 (어드민)
+exports.read_admin = function (member_idx, callback) {
+  db.query("SELECT * FROM `policy` AS p WHERE p.idx IN (SELECT a.policy_idx AS idx FROM policy_admin AS a WHERE a.member_idx = ?);", [member_idx], function (error, results, fields) {
+    if (!error) {
+      callback(true, results);
+    } else {
+      callback(false, 'policy_read_failed');
+    }
+  });
+};
+
 // 정책 수정
 exports.update = function (policy_idx, name, comment, mdm, callback) {
   db.query("UPDATE `policy` SET `name`=?, `comment`=?, `mdm`=? WHERE  `idx`=?;", [name, comment, mdm, policy_idx], function (error, results, fields) {
