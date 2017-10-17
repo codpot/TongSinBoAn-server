@@ -10,4 +10,15 @@ router.post('/', function (req, res) {
   });
 });
 
+// 로그인
+router.post('/login', function (req, res) {
+  member.login(req.body.userid, shajs('sha256').update(req.body.passwd).digest('hex'), function (result, data) {
+    if (result) {
+      res.json({'result': true, 'data': data[0]});
+    } else {
+      res.json({'result': false, 'msg': 'login_failed'});
+    }
+  });
+});
+
 module.exports = router;
