@@ -17,6 +17,8 @@ router.post('/login', function (req, res) {
   member.login(req.body.userid, shajs('sha256').update(req.body.passwd).digest('hex'), function (result, data) {
     if (result) {
       req.session.member_idx = data[0]['idx'];
+      req.session.group_idx = data[0]['group_idx'];
+      req.session.level = data[0]['level'];
       res.json({'result': true, 'data': data[0]});
     } else {
       res.json({'result': false, 'msg': 'login_failed'});
