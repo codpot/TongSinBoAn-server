@@ -57,7 +57,7 @@ exports.read_idx = function (policy_idx, callback) {
 
 // 정책 조회 (검증)
 exports.read_verify = function (policy_idx, token, now, callback) {
-  db.query("SELECT p.*, u.member_idx, u.chgdate FROM `policy` as p, `policy_user` as u WHERE p.idx = u.policy_idx AND u.policy_idx = ? AND u.member_idx = (SELECT m.idx FROM `member` as m WHERE m.token=? AND m.token_valid >= ?);", [policy_idx, token, now], function (error, results, fields) {
+  db.query("SELECT p.*, u.member_idx, u.chgdate FROM `policy` as p, `policy_user` as u WHERE p.idx = u.policy_idx AND u.policy_idx = ? AND u.member_idx = (SELECT m.idx FROM `member` as m WHERE m.token=? AND m.token_valid >= ?);", [policy_idx, token, now], function (error, results) {
     if (!error && results.length === 1) {
       callback(true, results);
     } else {
@@ -68,7 +68,7 @@ exports.read_verify = function (policy_idx, token, now, callback) {
 
 // 정책 조회 (검증 권한)
 exports.read_verify_auth = function (policy_idx, member_idx, callback) {
-  db.query("SELECT * FROM `policy_admin` WHERE `policy_idx` = ? AND `member_idx` = ?;", [policy_idx, member_idx], function (error, results, fields) {
+  db.query("SELECT * FROM `policy_admin` WHERE `policy_idx` = ? AND `member_idx` = ?;", [policy_idx, member_idx], function (error, results) {
     if (!error && results.length === 1) {
       callback(true);
     } else {

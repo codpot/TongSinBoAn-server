@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session');
 
 var group = require('./routes/group');
-var log = require('./routes/log');
 var member = require('./routes/member');
 var policy = require('./routes/policy');
 
@@ -16,15 +15,11 @@ app.use(bodyParser.json());
 app.use(cookieSession({
   name: 'session',
   secret: process.env.SESSION_SECRET,
-  maxAge: 30 * 24 * 60 * 60 * 1000
+  maxAge: process.env.SESSION_EXPIRE
 }));
 
 app.use(function (req, res, next) {
   req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
-  next();
-});
-
-app.use(function (req, res, next) {
   res.contentType('application/json');
   if (['POST', 'PUT'].indexOf(req.method) > -1 && !req.is('application/json')) {
     next(new Error);
@@ -34,7 +29,6 @@ app.use(function (req, res, next) {
 });
 
 app.use('/group', group);
-app.use('/log', log);
 app.use('/member', member);
 app.use('/policy', policy);
 
