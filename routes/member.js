@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
       if (result) {
         res.json({'result': true, 'data': data});
       } else {
-        res.json({'result': false, 'msg': 'authentication_required'});
+        res.json({'result': false, 'msg': 'member_read_failed'});
       }
     });
   } else {
