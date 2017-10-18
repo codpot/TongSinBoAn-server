@@ -1,25 +1,29 @@
 require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
-var cookieSession = require('cookie-session');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
+var db = require('./db');
 
 var group = require('./routes/group');
 var member = require('./routes/member');
 var policy = require('./routes/policy');
 
 var app = express();
+var sessionStore = new MySQLStore({'expiration': process.env.SESSION_EXPIRE * 1000}, db);
 
 app.disable('x-powered-by');
 app.use(bodyParser.json());
 
-app.use(cookieSession({
-  name: 'session',
+app.use(session({
+  key: 'session',
   secret: process.env.SESSION_SECRET,
-  maxAge: process.env.SESSION_EXPIRE * 1000
+  store: sessionStore,
+  resave: false,
+  saveUninitialized: false
 }));
 
 app.use(function (req, res, next) {
-  req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
   res.contentType('application/json');
   if (['POST', 'PUT'].indexOf(req.method) > -1 && !req.is('application/json')) {
     next(new Error);
