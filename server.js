@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(cookieSession({
   name: 'session',
   secret: process.env.SESSION_SECRET,
-  maxAge: process.env.SESSION_EXPIRE
+  maxAge: process.env.SESSION_EXPIRE * 1000
 }));
 
 app.use(function (req, res, next) {
