@@ -230,6 +230,29 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         {"result": false, "msg": "authentication_required"} // 로그인 되어 있지 않음
         ```
 
+- <code>GET</code> /member/me - 본인 정보 API
+
+    - 응답 JSON
+
+        ```
+        {
+            "result": true,
+            "data": {
+                "idx": 1,
+                "name": "관리자",
+                "group_idx": null,
+                "group_name": null,
+                "level": 0,
+                "token": "4fe692c0df8263e2571fe6fea61be426",
+                "token_valid": "2017-10-18T08:03:09.000Z",
+                "enabled": 1,
+                "regdate": "2017-10-17T04:20:16.000Z"
+            }
+        } // 성공
+        {"result": false, "msg": "authentication_required"} // 로그인 되어 있지 않음
+        {"result": false, "msg": "member_read_failed"} // 정보 조회 실패 (서버오류)
+        ```
+
 - <code>GET</code> /member/token - 토큰 생성 API
 
     - 응답 JSON

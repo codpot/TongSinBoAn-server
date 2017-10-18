@@ -86,6 +86,21 @@ router.get('/logout', function (req, res) {
   }
 });
 
+// 회원 정보 (본인)
+router.get('/me', function (req, res) {
+  if (req.session.member_idx) {
+    member.read_idx(req.session.member_idx, function (result, data) {
+      if (result) {
+        res.json({'result': true, 'data': data[0]});
+      } else {
+        res.json({'result': false, 'msg': 'member_read_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'authentication_required'});
+  }
+});
+
 // 토큰 발급
 router.get('/token', function (req, res) {
   if (req.session.member_idx) {
