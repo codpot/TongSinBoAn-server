@@ -53,7 +53,7 @@ DB_HOST=localhost # DB 호스트
 DB_PORT=3306 # DB 포트
 DB_USER=root # DB 유저
 DB_PASS=root # DB 비밀번호
-DB_DATABASE=tongsinboan # DB 데이터베이스명
+DB_NAME=tongsinboan # DB 데이터베이스명
 DB_POOL=10 # DB 접속 풀 사이즈
 ```
 
