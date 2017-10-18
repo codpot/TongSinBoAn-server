@@ -106,7 +106,7 @@ var policy_verify = function (res, policy_idx, token) {
         }
       });
     } else {
-      res.json({'result': false, 'msg': 'authentication_required'});
+      res.json({'result': false, 'msg': 'no_permission'});
     }
   });
 };
