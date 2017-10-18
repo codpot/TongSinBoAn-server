@@ -31,3 +31,7 @@ npm-debug.log
 
 # Intellij Folder
 .idea
+
+# Upload Folder
+/uploads/*.png
+!/uploads/profile.png

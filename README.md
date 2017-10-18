@@ -271,6 +271,7 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         ```
 
 #### 정책
+
 - <code>GET</code> /policy - 정책 조회 API
 
     본인에게 해당되는 정책만 표시됩니다.
@@ -387,6 +388,28 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         {"result": false, "msg": "authentication_required"} // 검증 권한이 없음
         {"result": false, "msg": "no_permission"} // 정책에 대한 권한이 없음
         {"result": false, "msg": "policy_verify_failed"} // 정책 검증 실패 (서버 오류)
+        ```
+
+#### 업로드
+
+- <code>POST</code> /upload - 프로필 이미지 업로드 API
+
+    로그인되어 있을 경우 호출이 가능합니다.
+
+    - 요청 DATA
+
+        ```
+        IMAGE_RAW_DATA
+        ```
+
+    - 응답 JSON
+
+        ```
+        {"result": true} // 성공
+        {"result": false, "msg": "authentication_required"} // 로그인 되어 있지 않음
+        {"result": false, "msg": "upload_failed"} // 업로드 실패 (서버 오류)
+        {"result": false, "msg": "upload_wrong_image"} // 잘못된 이미지 업로드
+        {"result": false, "msg": "upload_process_failed"} // 업로드 실패 (서버 오류)
         ```
 
 ## 라이센스

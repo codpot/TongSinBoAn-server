@@ -8,12 +8,10 @@ var db = require('./db');
 var group = require('./routes/group');
 var member = require('./routes/member');
 var policy = require('./routes/policy');
+var upload = require('./routes/upload');
 
 var app = express();
 var sessionStore = new MySQLStore({'expiration': process.env.SESSION_EXPIRE * 1000}, db);
-
-app.disable('x-powered-by');
-app.use(bodyParser.json());
 
 app.use(session({
   key: 'session',
@@ -22,6 +20,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+app.disable('x-powered-by');
+app.use('/upload', upload);
+app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
   res.contentType('application/json');
