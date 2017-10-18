@@ -35,7 +35,7 @@ exports.read_idx = function (member_idx, callback) {
 
 // 회원 조회 (아이디)
 exports.read_userid = function (userid, callback) {
-  db.query("SELECT idx FROM `member` WHERE userid = ?;", [userid], function (error, results) {
+  db.query("SELECT m.idx, m.name, m.group_idx, g.name as group_name, m.level, m.token, m.token_valid, m.enabled, m.regdate FROM `member` AS m LEFT JOIN `group` AS g ON m.group_idx = g.idx WHERE m.userid=?;", [userid], function (error, results) {
     if (!error && results.length === 1) {
       callback(true, results);
     } else {

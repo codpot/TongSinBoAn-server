@@ -37,6 +37,31 @@ router.post('/', function (req, res) {
   });
 });
 
+// 회원 승인
+router.post('/accept', function (req, res) {
+  if (req.session.member_idx && req.session.level === 3) {
+    member.read_idx(req.body.member_idx, function (result, data) {
+      if (result) {
+        if (data[0]['group_idx'] === req.session.group_idx && data[0]['level'] === 0) {
+          member.update(req.body.member_idx, {'level': '1'}, function (u_result) {
+            if (u_result) {
+              res.json({'result': true});
+            } else {
+              res.json({'result': false, 'msg': 'member_accept_failed'});
+            }
+          });
+        } else {
+          res.json({'result': false, 'msg': 'authentication_required'});
+        }
+      } else {
+        res.json({'result': false, 'msg': 'member_read_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'authentication_required'});
+  }
+});
+
 // 로그인
 router.post('/login', function (req, res) {
   member.read_login(req.body.userid, shajs('sha256').update(req.body.passwd).digest('hex'), function (result, data) {
