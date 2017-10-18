@@ -93,7 +93,7 @@ router.get('/token', function (req, res) {
     var expire = moment().add(process.env.TOKEN_EXPIRE, 'seconds').format('YYYY-MM-DD HH:mm:ss');
     member.update(req.session.member_idx, {'token': token, 'token_valid': expire}, function (result) {
       if (result) {
-        res.json({'result': true, 'data': {'token': token, 'expire': expire}});
+        res.json({'result': true, 'data': {'token': token, 'expire': parseInt(process.env.TOKEN_EXPIRE, 10), 'expire_at': expire}});
       } else {
         res.json({'result': false, 'msg': 'member_token_create_failed'});
       }
