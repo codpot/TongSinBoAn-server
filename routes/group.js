@@ -23,7 +23,7 @@ router.post('/join', function (req, res) {
   if (req.session.member_idx) {
     member.read_idx(req.session.member_idx, function (result, data) {
       if (data[0]['level'] === 0) {
-        group_join(res, req.session.member_idx, req.body.group, 1);
+        group_join(res, req.session.member_idx, req.body.group, 0);
       } else {
         res.json({'result': false, 'msg': 'group_exists'});
       }
