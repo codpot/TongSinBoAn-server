@@ -140,12 +140,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "profile_img": null,
                     "token": "4fe692c0df8263e2571fe6fea61be426",
                     "token_valid": "0000-00-00 00:00:00",
-                    "mdm_camera": 2,
-                    "mdm_mic": 2,
-                    "mdm_gps": 2,
-                    "mdm_wifi": 2,
-                    "mdm_hotspot": 2,
-                    "mdm_bluetooth": 2,
+                    "mdm_camera": 0,
+                    "mdm_mic": 0,
+                    "mdm_gps": 0,
+                    "mdm_wifi": 0,
+                    "mdm_hotspot": 0,
+                    "mdm_bluetooth": 0,
                     "regdate": "2017-10-17T04:20:16.000Z"
                 },
                 {
@@ -158,12 +158,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "profile_img": null,
                     "token": null,
                     "token_valid": null,
-                    "mdm_camera": 2,
-                    "mdm_mic": 2,
-                    "mdm_gps": 2,
-                    "mdm_wifi": 2,
-                    "mdm_hotspot": 2,
-                    "mdm_bluetooth": 2,
+                    "mdm_camera": 0,
+                    "mdm_mic": 0,
+                    "mdm_gps": 0,
+                    "mdm_wifi": 0,
+                    "mdm_hotspot": 0,
+                    "mdm_bluetooth": 0,
                     "regdate": "2017-10-18T07:06:17.000Z"
                 }
             ]
@@ -230,12 +230,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                 "profile_img": null,
                 "token": "4fe692c0df8263e2571fe6fea61be426",
                 "token_valid": "0000-00-00 00:00:00",
-                "mdm_camera": 2,
-                "mdm_mic": 2,
-                "mdm_gps": 2,
-                "mdm_wifi": 2,
-                "mdm_hotspot": 2,
-                "mdm_bluetooth": 2,
+                "mdm_camera": 0,
+                "mdm_mic": 0,
+                "mdm_gps": 0,
+                "mdm_wifi": 0,
+                "mdm_hotspot": 0,
+                "mdm_bluetooth": 0,
                 "regdate": "2017-10-17T04:20:16.000Z"
             }
         } // 성공
@@ -268,12 +268,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                 "profile_img": null,
                 "token": "4fe692c0df8263e2571fe6fea61be426",
                 "token_valid": "2017-10-18T08:03:09.000Z",
-                "mdm_camera": 2,
-                "mdm_mic": 2,
-                "mdm_gps": 2,
-                "mdm_wifi": 2,
-                "mdm_hotspot": 2,
-                "mdm_bluetooth": 2,
+                "mdm_camera": 0,
+                "mdm_mic": 0,
+                "mdm_gps": 0,
+                "mdm_wifi": 0,
+                "mdm_hotspot": 0,
+                "mdm_bluetooth": 0,
                 "regdate": "2017-10-17T04:20:16.000Z"
             }
         } // 성공
