@@ -68,7 +68,7 @@ exports.read_master = function (group_idx, callback) {
 
 // 정책을 적용받는 회원 조회
 exports.read_policy_user = function (policy_idx, callback) {
-  db.query("SELECT p.*, m.userid, m.name, m.belong FROM `policy_user` AS p LEFT JOIN `member` AS m ON p.member_idx = m.idx WHERE p.policy_idx = ?;", [policy_idx], function (error, results) {
+  db.query("SELECT p.*, m.userid, m.name, m.belong, m.profile_img FROM `policy_user` AS p LEFT JOIN `member` AS m ON p.member_idx = m.idx WHERE p.policy_idx = ?;", [policy_idx], function (error, results) {
     if (!error) {
       callback(true, results);
     } else {
@@ -79,7 +79,7 @@ exports.read_policy_user = function (policy_idx, callback) {
 
 // 정책 관리자 조회
 exports.read_policy_admin = function (policy_idx, callback) {
-  db.query("SELECT p.*, m.userid, m.name, m.belong FROM `policy_admin` AS p LEFT JOIN `member` AS m ON p.member_idx = m.idx WHERE p.policy_idx = ?;", [policy_idx], function (error, results) {
+  db.query("SELECT p.*, m.userid, m.name, m.belong, m.profile_img FROM `policy_admin` AS p LEFT JOIN `member` AS m ON p.member_idx = m.idx WHERE p.policy_idx = ?;", [policy_idx], function (error, results) {
     if (!error) {
       callback(true, results);
     } else {

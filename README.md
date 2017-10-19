@@ -394,7 +394,8 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "chgdate": "2017-10-19T14:09:45.000Z",
                     "userid": "admin",
                     "name": "보안담당자",
-                    "belong": "감찰보안실"
+                    "belong": "감찰보안실",
+                    "profile_img": null
                 },
                 {
                     "policy_idx": 1,
@@ -402,7 +403,8 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "chgdate": "2017-10-19T07:58:58.000Z",
                     "userid": "user",
                     "name": "간부",
-                    "belong": "사무실"
+                    "belong": "사무실",
+                    "profile_img": null
                 },
                 {
                     "policy_idx": 1,
@@ -410,7 +412,8 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "chgdate": "2017-10-19T14:10:05.000Z",
                     "userid": "admin",
                     "name": "위병사관",
-                    "belong": "위병소"
+                    "belong": "위병소",
+                    "profile_img": null
                 }
             ]
         } // 성공
@@ -464,7 +467,8 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "chgdate": "2017-10-19T14:10:05.000Z",
                     "userid": "admin",
                     "name": "위병사관",
-                    "belong": "위병소"
+                    "belong": "위병소",
+                    "profile_img": null
                 }
             ]
         } // 성공
