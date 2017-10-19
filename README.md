@@ -488,6 +488,7 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         {"result": true} // 성공
         {"result": false, "msg": "authentication_required"} // 권한이 없음
         {"result": false, "msg": "policy_create_admin_failed"} // 정책 관리자 추가 실패 (서버오류)
+        {"result": false, "msg": "policy_member_update_failed"} // 정책 관리자 레벨 변경 실패 (서버오류)
         ```
 
 - <code>DELETE</code> /policy/:policy_idx/user/:member_idx - 정책 관리자 삭제 API

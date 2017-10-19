@@ -129,7 +129,13 @@ router.post('/:policy_idx/admin', function (req, res) {
   if (req.session.member_idx && req.session.level === 3) {
     policy.create_policy_admin(req.params.policy_idx, req.body.member_idx, function (result) {
       if (result) {
-        res.json({'result': true});
+        member.update(req.body.member_idx, {'level': 2}, function (u_result) {
+          if (u_result) {
+            res.json({'result': true});
+          } else {
+            res.json({'result': false, 'msg': 'policy_member_update_failed'});
+          }
+        });
       } else {
         res.json({'result': false, 'msg': 'policy_create_admin_failed'});
       }
