@@ -87,3 +87,14 @@ exports.update = function (policy_idx, value, callback) {
     }
   });
 };
+
+// 정책 삭제
+exports.delete = function (policy_idx, callback) {
+  db.query("DELETE FROM `policy` WHERE `idx`=?;", [policy_idx], function (error, results) {
+    if (!error) {
+      callback(Boolean(results.affectedRows));
+    } else {
+      callback(false);
+    }
+  });
+};

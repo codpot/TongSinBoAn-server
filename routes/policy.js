@@ -49,6 +49,21 @@ router.put('/:policy_idx', function (req, res) {
   }
 });
 
+// 정책 삭제
+router.delete('/:policy_idx', function (req, res) {
+  if (req.session.member_idx && req.session.level === 3) {
+    policy.delete(req.params.policy_idx, function (result) {
+      if (result) {
+        res.json({'result': true});
+      } else {
+        res.json({'result': false, 'msg': 'policy_delete_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'authentication_required'});
+  }
+});
+
 // 정책 목록 (관리자)
 router.get('/admin', function (req, res) {
   if (req.session.member_idx && req.session.level >= 2) {

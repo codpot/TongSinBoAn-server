@@ -367,6 +367,18 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         {"result": false, "msg": "policy_update_failed"} // 정책 수정 실패 (서버오류 혹은 잘못된 mdm 값)
         ```
 
+- <code>DELETE</code> /policy/:policy_idx - 정책 삭제 API
+
+    권한이 마스터인 경우 호출이 가능합니다.
+
+    - 응답 JSON
+
+        ```
+        {"result": true} // 성공
+        {"result": false, "msg": "authentication_required"} // 권한이 없음
+        {"result": false, "msg": "policy_delete_failed"} // 정책 삭제 실패 (서버오류)
+        ```
+
 - <code>GET</code> /policy/admin - 관리자용 정책 조회 API
 
     권한이 마스터인 경우 모든 정책, 관리자인 경우 본인에게 할당된 정책을 조회할 수 있습니다.
