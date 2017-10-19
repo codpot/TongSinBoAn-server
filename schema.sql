@@ -13,16 +13,6 @@ CREATE TABLE IF NOT EXISTS `group` (
   CONSTRAINT `FK_group_member` FOREIGN KEY (`admin_idx`) REFERENCES `member` (`idx`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `log` (
-  `idx` int(11) NOT NULL AUTO_INCREMENT,
-  `member_idx` int(11) NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `regdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idx`),
-  KEY `FK_log_member` (`member_idx`),
-  CONSTRAINT `FK_log_member` FOREIGN KEY (`member_idx`) REFERENCES `member` (`idx`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 CREATE TABLE IF NOT EXISTS `member` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
   `userid` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
