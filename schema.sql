@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `passwd` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `group_idx` int(11) DEFAULT NULL,
+  `belong` text COLLATE utf8mb4_unicode_ci,
   `level` int(11) NOT NULL DEFAULT '0',
   `profile_img` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `token` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
