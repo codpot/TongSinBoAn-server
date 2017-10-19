@@ -1,7 +1,7 @@
 var express = require('express');
 var fs = require('fs');
 var Jimp = require('jimp');
-var md5File = require('md5-file');
+var md5 = require('md5');
 var path = require('path');
 var member = require('../db/member');
 var router = express.Router();
@@ -65,21 +65,11 @@ var upload_img_process = function (res, member_idx, filePath) {
 var upload_tmp_delete = function (res, member_idx, filePath, is_ok) {
   fs.unlink(filePath + '.tmp', function (err) {
     if (is_ok && !err) {
-      upload_file_md5(res, member_idx, filePath);
+      var hash = md5(member_idx + Date.now());
+      upload_set_profile(res, member_idx, hash);
     } else if (!is_ok) {
       res.json({'result': false, 'msg': 'upload_wrong_image'});
     } else  {
-      res.json({'result': false, 'msg': 'upload_process_failed'});
-    }
-  });
-};
-
-// # 프로필 해시 계산
-var upload_file_md5 = function (res, member_idx, filePath) {
-  md5File(filePath + '.png', function (err, hash) {
-    if (!err) {
-      upload_set_profile(res, member_idx, hash);
-    } else {
       res.json({'result': false, 'msg': 'upload_process_failed'});
     }
   });
