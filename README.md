@@ -51,7 +51,7 @@ SESSION_EXPIRE=86400 # 세션 유효 기간 (단위: 초)
 # Database
 DB_HOST=localhost # DB 호스트
 DB_PORT=3306 # DB 포트
-DB_USER=root # DB 유저
+DB_USER=root # DB 회원
 DB_PASS=root # DB 비밀번호
 DB_NAME=tongsinboan # DB 데이터베이스명
 DB_POOL=10 # DB 접속 풀 사이즈
@@ -377,6 +377,130 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         {"result": true} // 성공
         {"result": false, "msg": "authentication_required"} // 권한이 없음
         {"result": false, "msg": "policy_delete_failed"} // 정책 삭제 실패 (서버오류)
+        ```
+
+- <code>GET</code> /policy/:policy_idx/user - 정책을 적용받는 회원 조회 API
+
+    권한이 마스터인 경우 호출이 가능합니다.
+
+    - 응답 JSON
+
+        ```
+        {
+            "result": true,
+            "data": [
+                {
+                    "policy_idx": 1,
+                    "member_idx": 1,
+                    "chgdate": "2017-10-19T14:09:45.000Z",
+                    "userid": "admin",
+                    "name": "보안담당자",
+                    "belong": "감찰보안실"
+                },
+                {
+                    "policy_idx": 1,
+                    "member_idx": 2,
+                    "chgdate": "2017-10-19T07:58:58.000Z",
+                    "userid": "user",
+                    "name": "간부",
+                    "belong": "사무실"
+                },
+                {
+                    "policy_idx": 1,
+                    "member_idx": 3,
+                    "chgdate": "2017-10-19T14:10:05.000Z",
+                    "userid": "admin",
+                    "name": "위병사관",
+                    "belong": "위병소"
+                }
+            ]
+        } // 성공
+        {"result": false, "msg": "authentication_required"} // 로그인 되어 있지 않음
+        {"result": false, "msg": "policy_read_user_failed"} // 정책 회원 조회 실패 (서버오류)
+        ```
+
+- <code>POST</code> /policy/:policy_idx/user - 정책을 적용받는 회원 추가 API
+
+    권한이 마스터인 경우 호출이 가능합니다.
+
+    - 요청 JSON
+
+        ```
+        {"member_idx": 회원고유번호}
+        ```
+
+    - 응답 JSON
+
+        ```
+        {"result": true} // 성공
+        {"result": false, "msg": "authentication_required"} // 권한이 없음
+        {"result": false, "msg": "policy_create_user_failed"} // 정책 회원 추가 실패 (서버오류)
+        ```
+
+- <code>DELETE</code> /policy/:policy_idx/user/:member_idx - 정책을 적용받는 회원 삭제 API
+
+    권한이 마스터인 경우 호출이 가능합니다.
+
+    - 응답 JSON
+
+        ```
+        {"result": true} // 성공
+        {"result": false, "msg": "authentication_required"} // 권한이 없음
+        {"result": false, "msg": "policy_delete_user_failed"} // 정책 회원 삭제 실패 (서버오류)
+        ```
+
+- <code>GET</code> /policy/:policy_idx/admin - 정책 관리자 조회 API
+
+    권한이 마스터인 경우 호출이 가능합니다.
+
+    - 응답 JSON
+
+        ```
+        {
+            "result": true,
+            "data": [
+                {
+                    "policy_idx": 1,
+                    "member_idx": 3,
+                    "chgdate": "2017-10-19T14:10:05.000Z",
+                    "userid": "admin",
+                    "name": "위병사관",
+                    "belong": "위병소"
+                }
+            ]
+        } // 성공
+        {"result": false, "msg": "authentication_required"} // 로그인 되어 있지 않음
+        {"result": false, "msg": "policy_read_admin_failed"} // 정책 관리자 조회 실패 (서버오류)
+        ```
+
+- <code>POST</code> /policy/:policy_idx/admin - 정책 관리자 추가 API
+
+    권한이 마스터인 경우 호출이 가능합니다.
+
+    - 요청 JSON
+
+        ```
+        {"member_idx": 회원고유번호}
+        ```
+
+    - 응답 JSON
+
+        ```
+        {"result": true} // 성공
+        {"result": false, "msg": "authentication_required"} // 권한이 없음
+        {"result": false, "msg": "policy_create_admin_failed"} // 정책 관리자 추가 실패 (서버오류)
+        ```
+
+- <code>DELETE</code> /policy/:policy_idx/user/:member_idx - 정책 관리자 삭제 API
+
+    권한이 마스터인 경우 호출이 가능합니다.
+
+    - 응답 JSON
+
+        ```
+        {"result": true} // 성공
+        {"result": false, "msg": "authentication_required"} // 권한이 없음
+        {"result": false, "msg": "policy_delete_admin_failed"} // 정책 관리자 삭제 실패 (서버오류)
         ```
 
 - <code>GET</code> /policy/admin - 관리자용 정책 조회 API

@@ -64,6 +64,96 @@ router.delete('/:policy_idx', function (req, res) {
   }
 });
 
+// 정책을 적용받는 회원 조회
+router.get('/:policy_idx/user', function (req, res) {
+  if (req.session.member_idx && req.session.level === 3) {
+    policy.read_policy_user(req.params.policy_idx, function (result, data) {
+      if (result) {
+        res.json({'result': true, 'data': data});
+      } else {
+        res.json({'result': false, 'msg': 'policy_read_user_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'authentication_required'});
+  }
+});
+
+// 정책을 적용받는 회원 추가
+router.post('/:policy_idx/user', function (req, res) {
+  if (req.session.member_idx && req.session.level === 3) {
+    policy.create_policy_user(req.params.policy_idx, req.body.member_idx, function (result) {
+      if (result) {
+        res.json({'result': true});
+      } else {
+        res.json({'result': false, 'msg': 'policy_create_user_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'authentication_required'});
+  }
+});
+
+// 정책을 적용받는 회원 삭제
+router.delete('/:policy_idx/user/:member_idx', function (req, res) {
+  if (req.session.member_idx && req.session.level === 3) {
+    policy.delete_policy_user(req.params.policy_idx, req.params.member_idx, function (result) {
+      if (result) {
+        res.json({'result': true});
+      } else {
+        res.json({'result': false, 'msg': 'policy_delete_user_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'authentication_required'});
+  }
+});
+
+// 정책 관리자 조회
+router.get('/:policy_idx/admin', function (req, res) {
+  if (req.session.member_idx && req.session.level === 3) {
+    policy.read_policy_admin(req.params.policy_idx, function (result, data) {
+      if (result) {
+        res.json({'result': true, 'data': data});
+      } else {
+        res.json({'result': false, 'msg': 'policy_read_admin_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'authentication_required'});
+  }
+});
+
+// 정책 관리자 추가
+router.post('/:policy_idx/admin', function (req, res) {
+  if (req.session.member_idx && req.session.level === 3) {
+    policy.create_policy_admin(req.params.policy_idx, req.body.member_idx, function (result) {
+      if (result) {
+        res.json({'result': true});
+      } else {
+        res.json({'result': false, 'msg': 'policy_create_admin_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'authentication_required'});
+  }
+});
+
+// 정책 관리자 삭제
+router.delete('/:policy_idx/admin/:member_idx', function (req, res) {
+  if (req.session.member_idx && req.session.level === 3) {
+    policy.delete_policy_admin(req.params.policy_idx, req.params.member_idx, function (result) {
+      if (result) {
+        res.json({'result': true});
+      } else {
+        res.json({'result': false, 'msg': 'policy_delete_admin_failed'});
+      }
+    });
+  } else {
+    res.json({'result': false, 'msg': 'authentication_required'});
+  }
+});
+
 // 정책 목록 (관리자)
 router.get('/admin', function (req, res) {
   if (req.session.member_idx && req.session.level >= 2) {
