@@ -140,12 +140,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "profile_img": null,
                     "token": "4fe692c0df8263e2571fe6fea61be426",
                     "token_valid": "0000-00-00 00:00:00",
-                    "mdm_camera": null,
-                    "mdm_mic": null,
-                    "mdm_gps": null,
-                    "mdm_wifi": null,
-                    "mdm_hotspot": null,
-                    "mdm_bluetooth": null,
+                    "mdm_camera": 2,
+                    "mdm_mic": 2,
+                    "mdm_gps": 2,
+                    "mdm_wifi": 2,
+                    "mdm_hotspot": 2,
+                    "mdm_bluetooth": 2,
                     "regdate": "2017-10-17T04:20:16.000Z"
                 },
                 {
@@ -158,12 +158,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "profile_img": null,
                     "token": null,
                     "token_valid": null,
-                    "mdm_camera": null,
-                    "mdm_mic": null,
-                    "mdm_gps": null,
-                    "mdm_wifi": null,
-                    "mdm_hotspot": null,
-                    "mdm_bluetooth": null,
+                    "mdm_camera": 2,
+                    "mdm_mic": 2,
+                    "mdm_gps": 2,
+                    "mdm_wifi": 2,
+                    "mdm_hotspot": 2,
+                    "mdm_bluetooth": 2,
                     "regdate": "2017-10-18T07:06:17.000Z"
                 }
             ]
@@ -230,12 +230,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                 "profile_img": null,
                 "token": "4fe692c0df8263e2571fe6fea61be426",
                 "token_valid": "0000-00-00 00:00:00",
-                "mdm_camera": null,
-                "mdm_mic": null,
-                "mdm_gps": null,
-                "mdm_wifi": null,
-                "mdm_hotspot": null,
-                "mdm_bluetooth": null,
+                "mdm_camera": 2,
+                "mdm_mic": 2,
+                "mdm_gps": 2,
+                "mdm_wifi": 2,
+                "mdm_hotspot": 2,
+                "mdm_bluetooth": 2,
                 "regdate": "2017-10-17T04:20:16.000Z"
             }
         } // 성공
@@ -268,12 +268,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                 "profile_img": null,
                 "token": "4fe692c0df8263e2571fe6fea61be426",
                 "token_valid": "2017-10-18T08:03:09.000Z",
-                "mdm_camera": null,
-                "mdm_mic": null,
-                "mdm_gps": null,
-                "mdm_wifi": null,
-                "mdm_hotspot": null,
-                "mdm_bluetooth": null,
+                "mdm_camera": 2,
+                "mdm_mic": 2,
+                "mdm_gps": 2,
+                "mdm_wifi": 2,
+                "mdm_hotspot": 2,
+                "mdm_bluetooth": 2,
                 "regdate": "2017-10-17T04:20:16.000Z"
             }
         } // 성공
@@ -336,7 +336,7 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         ```
         {"name": "부대 IN", "comment": "부대에 들어갈 때 필요한 권한입니다.", "mdm_camera": 1, "mdm_mic": 1, "mdm_gps": 1, "mdm_wifi": 1, "mdm_hotspot": 1, "mdm_bluetooth": 1}
         
-        * mdm_* - 활성화: 1, 비활성화: 1, 상태유지: null
+        * mdm_* - 활성화: 1, 비활성화: 1, 상태유지: 2
         ```
 
     - 응답 JSON
@@ -356,7 +356,7 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         ```
         {"name": "부대 IN", "comment": "부대에 들어갈 때 필요한 권한입니다.", "mdm_camera": 1, "mdm_mic": 1, "mdm_gps": 1, "mdm_wifi": 1, "mdm_hotspot": 1, "mdm_bluetooth": 1}
         
-        * mdm_* - 활성화: 1, 비활성화: 1, 상태유지: null
+        * mdm_* - 활성화: 1, 비활성화: 1, 상태유지: 2
         ```
 
     - 응답 JSON
@@ -406,12 +406,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "group_idx": 1,
                     "name": "201호 출입",
                     "comment": "201호에 출입할 때 필요한 권한입니다.",
-                    "mdm_camera": null,
-                    "mdm_mic": null,
-                    "mdm_gps": null,
-                    "mdm_wifi": null,
-                    "mdm_hotspot": null,
-                    "mdm_bluetooth": null
+                    "mdm_camera": 2,
+                    "mdm_mic": 2,
+                    "mdm_gps": 2,
+                    "mdm_wifi": 2,
+                    "mdm_hotspot": 2,
+                    "mdm_bluetooth": 2
                 }
             ]
         } // 성공

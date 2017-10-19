@@ -95,22 +95,22 @@ var policy_verify = function (res, policy_idx, token) {
   policy.read_verify(policy_idx, token, now, function (result, data) {
     if (result) {
       var change = {'token_valid': '0000-00-00 00:00:00'};
-      if (data[0]['mdm_camera'] !== null) {
+      if (data[0]['mdm_camera'] !== 2) {
         change['mdm_camera'] = data[0]['mdm_camera'];
       }
-      if (data[0]['mdm_mic'] !== null) {
+      if (data[0]['mdm_mic'] !== 2) {
         change['mdm_mic'] = data[0]['mdm_mic'];
       }
-      if (data[0]['mdm_gps'] !== null) {
+      if (data[0]['mdm_gps'] !== 2) {
         change['mdm_gps'] = data[0]['mdm_gps'];
       }
-      if (data[0]['mdm_wifi'] !== null) {
+      if (data[0]['mdm_wifi'] !== 2) {
         change['mdm_wifi'] = data[0]['mdm_wifi'];
       }
-      if (data[0]['mdm_hotspot'] !== null) {
+      if (data[0]['mdm_hotspot'] !== 2) {
         change['mdm_hotspot'] = data[0]['mdm_hotspot'];
       }
-      if (data[0]['mdm_bluetooth'] !== null) {
+      if (data[0]['mdm_bluetooth'] !== 2) {
         change['mdm_bluetooth'] = data[0]['mdm_bluetooth'];
       }
       member.update(data[0]['member_idx'], change, function (result) {
