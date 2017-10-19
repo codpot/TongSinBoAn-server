@@ -628,6 +628,30 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         IMAGE_RAW_DATA
         ```
 
+## 구조
+
+    .
+    ├── db
+    │   ├── group.js           # 그룹 데이터베이스 SQL
+    │   ├── index.js           # 데이터베이스 생성
+    │   ├── member.js          # 회원 데이터베이스 SQL
+    │   └── policy.js          # 정책 데이터베이스 SQL
+    ├── .env                    # 서버 설정 파일
+    ├── .gitignore
+    ├── LICENSE
+    ├── package.json
+    ├── package-lock.json
+    ├── README.md
+    ├── routes
+    │   ├── group.js           # 그룹 라우팅
+    │   ├── member.js          # 회원 라우팅
+    │   ├── policy.js          # 정책 라우팅
+    │   └── upload.js          # 프로필 이미지 라우팅
+    ├── schema.sql              # 데이터베이스 스키마 파일
+    ├── server.js               # 서버 실행 파일
+    └── uploads                 # 프로필 이미지 업로드 폴더
+        └── profile.png         # 기본 프로필 이미지
+
 ## 라이센스
 
   [MIT](LICENSE)
