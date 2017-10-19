@@ -1,8 +1,8 @@
 var db = require('./index');
 
 // 정책 생성
-exports.create = function (group_idx, name, comment, mdm, callback) {
-  db.query("INSERT INTO `policy` (group_idx, name, comment, mdm) VALUES (?, ?, ?, ?);", [group_idx, name, comment, mdm], function (error, results) {
+exports.create = function (group_idx, name, comment, mdm_camera, mdm_mic, mdm_gps, mdm_wifi, mdm_hotspot, mdm_bluetooth, callback) {
+  db.query("INSERT INTO `policy` (group_idx, name, comment, mdm_camera, mdm_mic, mdm_gps, mdm_wifi, mdm_hotspot, mdm_bluetooth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", [group_idx, name, comment, mdm_camera, mdm_mic, mdm_gps, mdm_wifi, mdm_hotspot, mdm_bluetooth], function (error, results) {
     if (!error) {
       callback(results.insertId);
     } else {

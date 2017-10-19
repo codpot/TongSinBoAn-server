@@ -22,7 +22,7 @@ router.get('/', function (req, res) {
 // 정책 생성
 router.post('/', function (req, res) {
   if (req.session.member_idx && req.session.level === 3) {
-    policy.create(req.session.group_idx, req.body.name, req.body.comment, req.body.mdm, function (result) {
+    policy.create(req.session.group_idx, req.body.name, req.body.comment, req.body.mdm_camera, req.body.mdm_mic, req.body.mdm_gps, req.body.mdm_wifi, req.body.mdm_hotspot, req.body.mdm_bluetooth, function (result) {
       if (result) {
         res.json({'result': true});
       } else {
@@ -37,7 +37,7 @@ router.post('/', function (req, res) {
 // 정책 수정
 router.put('/:policy_idx', function (req, res) {
   if (req.session.member_idx && req.session.level === 3) {
-    policy.update(req.params.policy_idx, {'name': req.body.name, 'comment': req.body.comment, 'mdm': req.body.mdm}, function (result) {
+    policy.update(req.params.policy_idx, {'name': req.body.name, 'comment': req.body.comment, 'mdm_camera': req.body.mdm_camera, 'mdm_mic': req.body.mdm_mic, 'mdm_gps': req.body.mdm_gps, 'mdm_wifi': req.body.mdm_wifi, 'mdm_hotspot': req.body.mdm_hotspot, 'mdm_bluetooth': req.body.mdm_bluetooth}, function (result) {
       if (result) {
         res.json({'result': true});
       } else {
@@ -95,8 +95,23 @@ var policy_verify = function (res, policy_idx, token) {
   policy.read_verify(policy_idx, token, now, function (result, data) {
     if (result) {
       var change = {'token_valid': '0000-00-00 00:00:00'};
-      if (data[0]['mdm'] !== null) {
-        change['enabled'] = data[0]['mdm'];
+      if (data[0]['mdm_camera'] !== null) {
+        change['mdm_camera'] = data[0]['mdm_camera'];
+      }
+      if (data[0]['mdm_mic'] !== null) {
+        change['mdm_mic'] = data[0]['mdm_mic'];
+      }
+      if (data[0]['mdm_gps'] !== null) {
+        change['mdm_gps'] = data[0]['mdm_gps'];
+      }
+      if (data[0]['mdm_wifi'] !== null) {
+        change['mdm_wifi'] = data[0]['mdm_wifi'];
+      }
+      if (data[0]['mdm_hotspot'] !== null) {
+        change['mdm_hotspot'] = data[0]['mdm_hotspot'];
+      }
+      if (data[0]['mdm_bluetooth'] !== null) {
+        change['mdm_bluetooth'] = data[0]['mdm_bluetooth'];
       }
       member.update(data[0]['member_idx'], change, function (result) {
         if (result) {

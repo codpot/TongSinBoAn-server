@@ -140,7 +140,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "profile_img": null,
                     "token": "4fe692c0df8263e2571fe6fea61be426",
                     "token_valid": "0000-00-00 00:00:00",
-                    "enabled": 1,
+                    "mdm_camera": null,
+                    "mdm_mic": null,
+                    "mdm_gps": null,
+                    "mdm_wifi": null,
+                    "mdm_hotspot": null,
+                    "mdm_bluetooth": null,
                     "regdate": "2017-10-17T04:20:16.000Z"
                 },
                 {
@@ -153,7 +158,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "profile_img": null,
                     "token": null,
                     "token_valid": null,
-                    "enabled": 0,
+                    "mdm_camera": null,
+                    "mdm_mic": null,
+                    "mdm_gps": null,
+                    "mdm_wifi": null,
+                    "mdm_hotspot": null,
+                    "mdm_bluetooth": null,
                     "regdate": "2017-10-18T07:06:17.000Z"
                 }
             ]
@@ -220,7 +230,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                 "profile_img": null,
                 "token": "4fe692c0df8263e2571fe6fea61be426",
                 "token_valid": "0000-00-00 00:00:00",
-                "enabled": 1,
+                "mdm_camera": null,
+                "mdm_mic": null,
+                "mdm_gps": null,
+                "mdm_wifi": null,
+                "mdm_hotspot": null,
+                "mdm_bluetooth": null,
                 "regdate": "2017-10-17T04:20:16.000Z"
             }
         } // 성공
@@ -253,7 +268,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                 "profile_img": null,
                 "token": "4fe692c0df8263e2571fe6fea61be426",
                 "token_valid": "2017-10-18T08:03:09.000Z",
-                "enabled": 1,
+                "mdm_camera": null,
+                "mdm_mic": null,
+                "mdm_gps": null,
+                "mdm_wifi": null,
+                "mdm_hotspot": null,
+                "mdm_bluetooth": null,
                 "regdate": "2017-10-17T04:20:16.000Z"
             }
         } // 성공
@@ -295,7 +315,12 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "group_idx": 1,
                     "name": "부대 IN",
                     "comment": "부대에 들어갈 때 필요한 권한입니다.",
-                    "mdm": 1
+                    "mdm_camera": 1,
+                    "mdm_mic": 1,
+                    "mdm_gps": 1,
+                    "mdm_wifi": 1,
+                    "mdm_hotspot": 1,
+                    "mdm_bluetooth": 1
                 }
             ]
         } // 성공
@@ -309,9 +334,9 @@ Windows 명령 프롬프트 (Windows Command Prompt)
     - 요청 JSON
 
         ```
-        {"name": "부대 IN", "comment": "부대에 들어갈 때 필요한 권한입니다.", "mdm": 1}
+        {"name": "부대 IN", "comment": "부대에 들어갈 때 필요한 권한입니다.", "mdm_camera": 1, "mdm_mic": 1, "mdm_gps": 1, "mdm_wifi": 1, "mdm_hotspot": 1, "mdm_bluetooth": 1}
         
-        * mdm - 활성화: 1, 비활성화: 1, 상태유지: null
+        * mdm_* - 활성화: 1, 비활성화: 1, 상태유지: null
         ```
 
     - 응답 JSON
@@ -329,9 +354,9 @@ Windows 명령 프롬프트 (Windows Command Prompt)
     - 요청 JSON
 
         ```
-        {"name": "부대 IN", "comment": "부대에 들어갈 때 필요한 권한입니다.", "mdm": 1}
+        {"name": "부대 IN", "comment": "부대에 들어갈 때 필요한 권한입니다.", "mdm_camera": 1, "mdm_mic": 1, "mdm_gps": 1, "mdm_wifi": 1, "mdm_hotspot": 1, "mdm_bluetooth": 1}
         
-        * mdm - 활성화: 1, 비활성화: 1, 상태유지: null
+        * mdm_* - 활성화: 1, 비활성화: 1, 상태유지: null
         ```
 
     - 응답 JSON
@@ -357,21 +382,36 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "group_idx": 1,
                     "name": "부대 IN",
                     "comment": "부대에 들어갈 때 필요한 권한입니다.",
-                    "mdm": 1
+                    "mdm_camera": 1,
+                    "mdm_mic": 1,
+                    "mdm_gps": 1,
+                    "mdm_wifi": 1,
+                    "mdm_hotspot": 1,
+                    "mdm_bluetooth": 1
                 },
                 {
                     "idx": 2,
                     "group_idx": 1,
                     "name": "부대 OUT",
                     "comment": "부대에서 밖으로 나갈 때 필요한 권한입니다.",
-                    "mdm": 0
+                    "mdm_camera": 0,
+                    "mdm_mic": 0,
+                    "mdm_gps": 0,
+                    "mdm_wifi": 0,
+                    "mdm_hotspot": 0,
+                    "mdm_bluetooth": 0
                 },
                 {
                     "idx": 3,
                     "group_idx": 1,
                     "name": "201호 출입",
                     "comment": "201호에 출입할 때 필요한 권한입니다.",
-                    "mdm": null
+                    "mdm_camera": null,
+                    "mdm_mic": null,
+                    "mdm_gps": null,
+                    "mdm_wifi": null,
+                    "mdm_hotspot": null,
+                    "mdm_bluetooth": null
                 }
             ]
         } // 성공
