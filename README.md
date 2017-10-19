@@ -136,6 +136,7 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "group_idx": 1,
                     "group_name": "육군",
                     "level": 3,
+                    "profile_img": null,
                     "token": "4fe692c0df8263e2571fe6fea61be426",
                     "token_valid": "0000-00-00 00:00:00",
                     "enabled": 1,
@@ -147,6 +148,7 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                     "group_idx": 1,
                     "group_name": "육군",
                     "level": 1,
+                    "profile_img": null,
                     "token": null,
                     "token_valid": null,
                     "enabled": 0,
@@ -212,6 +214,7 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                 "group_idx": 1,
                 "group_name": "육군",
                 "level": 3,
+                "profile_img": null,
                 "token": "4fe692c0df8263e2571fe6fea61be426",
                 "token_valid": "0000-00-00 00:00:00",
                 "enabled": 1,
@@ -243,6 +246,7 @@ Windows 명령 프롬프트 (Windows Command Prompt)
                 "group_idx": null,
                 "group_name": null,
                 "level": 0,
+                "profile_img": null,
                 "token": "4fe692c0df8263e2571fe6fea61be426",
                 "token_valid": "2017-10-18T08:03:09.000Z",
                 "enabled": 1,
@@ -410,6 +414,16 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         {"result": false, "msg": "upload_failed"} // 업로드 실패 (서버 오류)
         {"result": false, "msg": "upload_wrong_image"} // 잘못된 이미지 업로드
         {"result": false, "msg": "upload_process_failed"} // 업로드 실패 (서버 오류)
+        ```
+
+- <code>GET</code> /upload/:profile_img - 프로필 이미지 다운로드 API
+
+    PNG 포맷으로 이미지가 출력됩니다. (기본 프로필 이미지: :profile_img = 0)
+
+    - 응답 DATA
+
+        ```
+        IMAGE_RAW_DATA
         ```
 
 ## 라이센스

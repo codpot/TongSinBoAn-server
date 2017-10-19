@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `group_idx` int(11) DEFAULT NULL,
   `level` int(11) NOT NULL DEFAULT '0',
+  `profile_img` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `token` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `token_valid` datetime DEFAULT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '0',
@@ -69,6 +70,13 @@ CREATE TABLE IF NOT EXISTS `policy_user` (
   KEY `FK_policy_user_member` (`member_idx`),
   CONSTRAINT `FK_policy_user_member` FOREIGN KEY (`member_idx`) REFERENCES `member` (`idx`),
   CONSTRAINT `FK_policy_user_policy` FOREIGN KEY (`policy_idx`) REFERENCES `policy` (`idx`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) unsigned NOT NULL,
+  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
