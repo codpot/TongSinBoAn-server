@@ -81,7 +81,11 @@ router.post('/verify/:policy_idx', function (req, res) {
       if (result) {
         policy_verify(res, req.params.policy_idx, req.body.token);
       } else {
-        res.json({'result': false, 'msg': 'authentication_required'});
+        if (req.session.level === 3) {
+          policy_verify(res, req.params.policy_idx, req.body.token);
+        } else {
+          res.json({'result': false, 'msg': 'authentication_required'});
+        }
       }
     });
   } else {
@@ -115,7 +119,13 @@ var policy_verify = function (res, policy_idx, token) {
       }
       member.update(data[0]['member_idx'], change, function (result) {
         if (result) {
-          res.json({'result': true});
+          member.read_idx(data[0]['member_idx'], function (r_result, r_data) {
+            if (r_result) {
+              res.json({'result': true, 'data': r_data[0]});
+            } else {
+              res.json({'result': false, 'msg': 'policy_member_read_failed'});
+            }
+          });
         } else {
           res.json({'result': false, 'msg': 'policy_verify_failed'});
         }

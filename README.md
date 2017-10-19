@@ -432,10 +432,31 @@ Windows 명령 프롬프트 (Windows Command Prompt)
     - 응답 JSON
 
         ```
-        {"result": true} // 성공
+        {
+            "result": true,
+            "data": {
+                "idx": 2,
+                "name": "대위 홍길동",
+                "group_idx": 1,
+                "group_name": "육군",
+                "belong": "00사령부",
+                "level": 1,
+                "profile_img": "28c72355244e81149080e4303a656d3e",
+                "token": "1fsa2355244e81149080e4303a656d3e",
+                "token_valid": "0000-00-00 00:00:00",
+                "mdm_camera": 1,
+                "mdm_mic": 0,
+                "mdm_gps": 1,
+                "mdm_wifi": 1,
+                "mdm_hotspot": 1,
+                "mdm_bluetooth": 1,
+                "regdate": "2017-10-19T05:39:14.000Z"
+            }
+        } // 성공
         {"result": false, "msg": "authentication_required"} // 검증 권한이 없음
         {"result": false, "msg": "no_permission"} // 정책에 대한 권한이 없음
         {"result": false, "msg": "policy_verify_failed"} // 정책 검증 실패 (서버 오류)
+        {"result": false, "msg": "policy_member_read_failed"} // 회원 정보 조회 실패 (서버 오류)
         ```
 
 #### 업로드
