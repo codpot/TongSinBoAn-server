@@ -9,14 +9,24 @@ var router = express.Router();
 // 프로필 이미지 업로드
 router.post('/', function (req, res) {
   if (req.session.member_idx) {
-    var filePath = path.join(__dirname, '../uploads', req.session.member_idx.toString());
-    var ws = fs.createWriteStream(filePath + '.tmp');
-    req.pipe(ws);
-    ws.on('finish', function () {
-      upload_img_process(res, req.session.member_idx, filePath);
-    });
-    ws.on('error', function () {
-      res.json({'result': false, 'msg': 'upload_failed'});
+    member.read_idx(req.session.member_idx, function (result, data) {
+      if (result) {
+        if (data[0]['profile_img'] === null) {
+          var filePath = path.join(__dirname, '../uploads', req.session.member_idx.toString());
+          var ws = fs.createWriteStream(filePath + '.tmp');
+          req.pipe(ws);
+          ws.on('finish', function () {
+            upload_img_process(res, req.session.member_idx, filePath);
+          });
+          ws.on('error', function () {
+            res.json({'result': false, 'msg': 'upload_failed'});
+          });
+        } else {
+          res.json({'result': false, 'msg': 'upload_img_exists'});
+        }
+      } else {
+        res.json({'result': false, 'msg': 'upload_server_error'});
+      }
     });
   } else {
     res.json({'result': false, 'msg': 'authentication_required'});

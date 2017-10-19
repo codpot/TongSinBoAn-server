@@ -411,6 +411,8 @@ Windows 명령 프롬프트 (Windows Command Prompt)
         ```
         {"result": true} // 성공
         {"result": false, "msg": "authentication_required"} // 로그인 되어 있지 않음
+        {"result": false, "msg": "upload_server_error"} // 서버 에러
+        {"result": false, "msg": "upload_img_exists"} // 이미 프로필 이미지가 있음
         {"result": false, "msg": "upload_failed"} // 업로드 실패 (서버 오류)
         {"result": false, "msg": "upload_wrong_image"} // 잘못된 이미지 업로드
         {"result": false, "msg": "upload_process_failed"} // 업로드 실패 (서버 오류)
